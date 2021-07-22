@@ -1,7 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import styles from "@/styles/Layout.module.css";
 import Footer from "./Footer";
 import Header from "./Header";
+import Showcase from "./Showcase";
 /**
  * Used to create a custom Head for each page
  *
@@ -11,6 +13,7 @@ import Header from "./Header";
  * @param {object} children The children to render
  */
 export default function Layout({ title, keywords, description, children }) {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -19,6 +22,7 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
+      {router.pathname === "/" && <Showcase />}
       <div className={styles.container}>{children}</div>
       <Footer />
     </div>
