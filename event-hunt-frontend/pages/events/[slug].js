@@ -26,6 +26,21 @@ export async function getStaticPaths() {
   };
 }
 
+/**
+ * Fetch data for a single event from API and populate the props for EventPage
+ * This is done at build time
+ */
+export async function getStaticProps({ params: { slug } }) {
+  const res = await fetch(`${API_URL}/api/events/${slug}`);
+
+  const events = await res.json();
+
+  return {
+    props: { evt: events[0] },
+    revalidate: 1,
+  };
+}
+
 // export async function getServerSideProps({ query: { slug } }) {
 //   const res = await fetch(`${API_URL}/api/events/${slug}`);
 
