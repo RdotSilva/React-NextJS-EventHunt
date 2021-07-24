@@ -9,12 +9,29 @@ export default function EventPage({ evt }) {
   );
 }
 
-export async function getServerSideProps({ query: { slug } }) {
-  const res = await fetch(`${API_URL}/api/events/${slug}`);
-
+/**
+ * Generate all of your static paths to pass into getStaticProps
+ */
+export async function getStaticPaths() {
+  const res = await fetch(`${API_URL}/api/events/`);
   const events = await res.json();
 
+  const paths = events.map((evt) => ({
+    params: { slug: evt.slug },
+  }));
+
   return {
-    props: { evt: events[0] },
+    paths,
+    fallback: true,
   };
 }
+
+// export async function getServerSideProps({ query: { slug } }) {
+//   const res = await fetch(`${API_URL}/api/events/${slug}`);
+
+//   const events = await res.json();
+
+//   return {
+//     props: { evt: events[0] },
+//   };
+// }
