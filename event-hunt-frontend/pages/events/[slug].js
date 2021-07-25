@@ -1,10 +1,22 @@
 import Layout from "@/components/Layout";
+import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import { API_URL } from "@/config/index";
+import styles from "@/styles/Event.module.css";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function EventPage({ evt }) {
   return (
     <Layout>
-      <h1>{evt.name}</h1>
+      <div className={styles.event}>
+        <div className={styles.controls}>
+          <Link href={`/events/edit/${evt.id}`}>
+            <a>
+              <FaPencilAlt /> Edit Event
+            </a>
+          </Link>
+        </div>
+      </div>
     </Layout>
   );
 }
