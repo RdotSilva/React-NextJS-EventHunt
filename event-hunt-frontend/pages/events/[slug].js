@@ -6,6 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function EventPage({ evt }) {
+  const deleteEvent = (e) => {
+    console.log("Delete Event");
+  };
+
   return (
     <Layout>
       <div className={styles.event}>
@@ -15,6 +19,9 @@ export default function EventPage({ evt }) {
               <FaPencilAlt /> Edit Event
             </a>
           </Link>
+          <a href="#" className={styles.delete} onClick={deleteEvent}>
+            <FaTimes /> Delete Event
+          </a>
         </div>
       </div>
     </Layout>
