@@ -4,7 +4,7 @@ Event Hunt is a place where you can find the hottest local events
 
 ## Installation
 
-2. Install dependencies in client
+1. Install dependencies in front end
 
 ```
 cd event-hunt-frontend
@@ -14,9 +14,19 @@ cd event-hunt-frontend
 npm install
 ```
 
+2. Install dependencies in backend
+
+```
+cd event-hunt-backend
+```
+
+```
+npm install
+```
+
 ## Running the application
 
-2. Run the React client
+1. Run the React front end
 
 ```
 cd event-hunt-frontend
@@ -26,9 +36,21 @@ cd event-hunt-frontend
 npm run dev
 ```
 
+2. Run the Strapi back end
+
+```
+cd event-hunt-backend
+```
+
+```
+npm run develop
+```
+
 ## Built With
 
 - [React](https://reactjs.org/)
+- [Strapi](https://strapi.io/)
+- [Cloudinary](https://cloudinary.com/)
 
 ## Screenshots
 
