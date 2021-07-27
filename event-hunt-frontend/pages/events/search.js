@@ -20,3 +20,24 @@ export default function SearchPage({ events }) {
     </Layout>
   );
 }
+
+export async function getServerSideProps({ query: { term } }) {
+  const query = qs.stringify({
+    _where: {
+      _or: [
+        { name_contains: term },
+        { performers_contains: term },
+        { description_contains: term },
+        { venue_contains: term },
+      ],
+    },
+  });
+  const res = await fetch(`${API_URL}/events?${query}`);
+  const events = await res.json();
+
+  return {
+    props: {
+      events,
+    },
+  };
+}
