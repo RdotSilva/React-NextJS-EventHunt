@@ -17,6 +17,19 @@ export default function AddEventPage() {
 
   const router = useRouter();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //TODO: Add logic for submit
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
   return (
     <Layout title="Add New Event">
       <Link href="events">Go Back</Link>
