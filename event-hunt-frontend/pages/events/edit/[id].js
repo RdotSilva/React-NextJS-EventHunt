@@ -6,19 +6,52 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { API_URL } from "@/config/index";
+import moment from "moment";
 
-export default function EditEventPage() {
+export default function EditEventPage({ evt }) {
   const [values, setValues] = useState({
-    name: "",
-    performers: "",
-    venue: "",
-    address: "",
-    date: "",
-    time: "",
-    description: "",
+    name: evt.name,
+    performers: evt.performers,
+    venue: evt.venue,
+    address: evt.address,
+    date: evt.date,
+    time: evt.time,
+    description: evt.description,
   });
 
   const router = useRouter();
+
+  /**
+   * Save new event and redirect to event page
+   * @param {object} e The event object
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation
+    const hasEmptyFields = Object.values(values).some(
+      (element) => element === ""
+    );
+
+    if (hasEmptyFields) {
+      toast.error("Please fill in all fields!");
+    }
+
+    const res = await fetch(`${API_URL}/events/${evt.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      toast.error("Something went wrong");
+    } else {
+      const evt = await res.json();
+      router.push(`/events/${evt.slug}`);
+    }
+  };
 
   /**
    * Update state when input fields are edited
@@ -85,7 +118,7 @@ export default function EditEventPage() {
             type="date"
             name="date"
             id="date"
-            value={values.date}
+            value={moment(values.date).format("yyyy-MM-DD")}
             onChange={handleInputChange}
           />
         </div>
@@ -115,4 +148,15 @@ export default function EditEventPage() {
       </form>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ params: { id } }) {
+  const res = await fetch(`${API_URL}/events/${id}`);
+  const evt = await res.json();
+
+  return {
+    props: {
+      evt,
+    },
+  };
 }
