@@ -5,6 +5,36 @@ import styles from "@/styles//Form.module.css";
 export default function ImageUpload({ evtId, imageUploaded }) {
   const [image, setImage] = useState(null);
 
+  /**
+   * Create a new FormData object for the image and upload image
+   * @param {object} e The event object
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("files", image);
+    formData.append("ref", "events");
+    formData.append("refId", evtId);
+    formData.append("field", "image");
+
+    const res = await fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      imageUploaded();
+    }
+  };
+
+  /**
+   * Set the image state to the current file
+   * @param {object} e The event object
+   */
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   return (
     <div className={styles.form}>
       <h1>Upload Event Image</h1>
