@@ -75,9 +75,14 @@ export default function EditEventPage({ evt }) {
     });
   };
 
-  const imageUploaded = () => {
-    // TODO: Add image uploaded logic
-    console.log("Uploaded Image");
+  /**
+   * Fetch the newly uploaded image data and set the image preview thumbnail
+   */
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`);
+    const data = await res.json();
+    setImagePreview(data.image.formats.thumbnail.url);
+    setShowModal(false);
   };
 
   return (
