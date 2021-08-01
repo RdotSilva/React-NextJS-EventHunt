@@ -49,8 +49,10 @@ npm run develop
 ## Built With
 
 - [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
 - [Strapi](https://strapi.io/)
 - [Cloudinary](https://cloudinary.com/)
+- [React-Toastify](https://www.npmjs.com/package/react-toastify)
 
 ## Screenshots
 
