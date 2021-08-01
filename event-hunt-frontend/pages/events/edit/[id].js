@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import Modal from "@/components/Modal";
+import ImageUpload from "@/components/ImageUpload";
 import { FaImage } from "react-icons/fa";
 import styles from "@/styles/Form.module.css";
 import Link from "next/link";
@@ -72,6 +73,11 @@ export default function EditEventPage({ evt }) {
       ...values,
       [name]: value,
     });
+  };
+
+  const imageUploaded = () => {
+    // TODO: Add image uploaded logic
+    console.log("Uploaded Image");
   };
 
   return (
@@ -171,8 +177,7 @@ export default function EditEventPage({ evt }) {
         </button>
       </div>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        IMAGE UPLOAD
-        {/* TODO: Add logic for image upload */}
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
       </Modal>
     </Layout>
   );
