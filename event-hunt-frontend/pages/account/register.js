@@ -7,6 +7,7 @@ import Layout from "@/components/Layout";
 import styles from "@/styles/AuthForm.module.css";
 
 export default function RegisterPage() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
 
   return (
@@ -17,6 +18,15 @@ export default function RegisterPage() {
         </h1>
         <ToastContainer />
         <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+          </div>
           <div>
             <label htmlFor="email">Email Address</label>
             <input
