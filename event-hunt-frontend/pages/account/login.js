@@ -8,9 +8,11 @@ import styles from "@/styles/AuthForm.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // TODO: Add logic to submit form data
   };
 
   return (
@@ -30,7 +32,20 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
+          <input type="submit" value="Login" className="btn" />
         </form>
+        <p>
+          Don't have an account? <Link href="/account/register">Register</Link>
+        </p>
       </div>
     </Layout>
   );
