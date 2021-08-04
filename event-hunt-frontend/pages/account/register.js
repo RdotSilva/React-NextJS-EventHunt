@@ -9,6 +9,13 @@ import styles from "@/styles/AuthForm.module.css";
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Add logic to submit form data
+  };
 
   return (
     <Layout title="User Registration">
@@ -36,7 +43,29 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="passwordConfirm">Confirm Password</label>
+            <input
+              type="password"
+              id="passwordConfirm"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+            ></input>
+          </div>
+          <input type="submit" value="Login" className="btn" />
         </form>
+        <p>
+          Already have an account? <Link href="/account/login">Login</Link>
+        </p>
       </div>
     </Layout>
   );
