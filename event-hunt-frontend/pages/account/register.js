@@ -14,7 +14,12 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Add logic to submit form data
+    if (password !== passwordConfirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    // TODO: Add logic for submit form
   };
 
   return (
