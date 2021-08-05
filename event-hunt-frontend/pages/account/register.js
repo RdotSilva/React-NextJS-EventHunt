@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
+import AuthContext from "@/context/AuthContext";
 import Layout from "@/components/Layout";
 import styles from "@/styles/AuthForm.module.css";
 
@@ -12,14 +13,19 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const { register, errors } = useContext(AuthContext);
+
+  /**
+   * Check user passwords match and then register user
+   * @param {object} e The event
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== passwordConfirm) {
       toast.error("Passwords do not match");
       return;
     }
-
-    // TODO: Add logic for submit form
+    register({ username, email, password });
   };
 
   return (
