@@ -6,7 +6,7 @@ export default async (req, res) => {
 
     // TODO: Update logic to log user in, this will be called from AuthContext
     console.log(req.body);
-    res.statis(200).json({});
+    res.status(200).json({});
   } else {
     res.setHeader("Allow", ["POST"]);
     res.status(405).json({ message: `Method ${req.method} not allowed` });
