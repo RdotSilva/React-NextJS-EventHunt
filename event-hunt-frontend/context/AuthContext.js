@@ -24,10 +24,11 @@ export const AuthProvider = ({ children }) => {
 
     const data = await res.json();
 
-    console.log(data);
     if (res.ok) {
-      // TODO: Add logic when user logs in successfully
+      setUser(data.user);
     } else {
+      setError(data.message);
+      setError(null);
     }
   };
 
