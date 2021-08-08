@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
+  const router = useRouter();
+
   /**
    * Check if user is logged in
    */
@@ -52,6 +54,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
+      router.push("/account/dashboard");
     } else {
       setUser(null);
     }
