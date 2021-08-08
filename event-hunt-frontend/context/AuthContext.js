@@ -37,9 +37,19 @@ export const AuthProvider = ({ children }) => {
     console.log("Logout");
   };
 
-  // Check if user is logged in (so that user can persist through refreshes)
+  /**
+   * Hit the Strapi backend to check for token and set user state
+   * @param {object} user
+   */
   const checkUserLoggedIn = async (user) => {
-    console.log("Checked");
+    const res = await fetch(`${NEXT_URL}/api/user`);
+    const data = await res.json();
+
+    if (res.ok) {
+      setUser(data.user);
+    } else {
+      setUser(null);
+    }
   };
 
   return (
