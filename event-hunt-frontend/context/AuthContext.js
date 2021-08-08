@@ -8,6 +8,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
+  /**
+   * Check if user is logged in
+   */
+  useEffect(() => checkUserLoggedIn(), []);
+
   // Register User
   const register = async (user) => {
     console.log(user);
