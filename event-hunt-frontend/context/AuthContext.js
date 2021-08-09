@@ -39,9 +39,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout User
+  /**
+   * Logout/reset user and then redirect to home page
+   */
   const logout = async () => {
-    console.log("Logout");
+    const res = await fetch(`${NEXT_URL}/api/logout`, {
+      method: "POST",
+    });
+
+    if (res.ok) {
+      setUser(null);
+      router.push("/");
+    }
   };
 
   /**
