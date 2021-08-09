@@ -16,6 +16,11 @@ export default function RegisterPage() {
   const { register, errors } = useContext(AuthContext);
 
   /**
+   * Check for errors and display an error toast
+   */
+  useEffect(() => error && toast.error(error));
+
+  /**
    * Check user passwords match and then register user
    * @param {object} e The event
    */
@@ -25,6 +30,7 @@ export default function RegisterPage() {
       toast.error("Passwords do not match");
       return;
     }
+
     register({ username, email, password });
   };
 
