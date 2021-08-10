@@ -6,6 +6,8 @@ const { sanitizeEntity } = require("strapi-utils");
  * to customize this controller
  */
 
+// TODO: Go to strapi backend and update settings (admin login) (settings -> roles -> Authentcated (select me))
+
 module.exports = {
   // Get logged in users
   async me(ctx) {
