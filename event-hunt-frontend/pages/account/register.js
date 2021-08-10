@@ -15,6 +15,8 @@ export default function RegisterPage() {
 
   const { register, errors } = useContext(AuthContext);
 
+  // TODO: Set User on Events in Strapi Backend (some of these do not have a user associated, you need to login to admin dashboard to do this)
+
   /**
    * Check for errors and display an error toast
    */
