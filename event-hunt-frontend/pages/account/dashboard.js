@@ -1,8 +1,9 @@
 import Layout from "@/components/Layout";
-import { API_URL } from "@/config/";
+import { API_URL } from "@/config/index";
 import { parseCookies } from "@/helpers/index";
 
-export default function Dashboard() {
+export default function Dashboard({ events }) {
+  console.log(events);
   return (
     <Layout title="User Dashboard">
       <h1>Dashboard</h1>
