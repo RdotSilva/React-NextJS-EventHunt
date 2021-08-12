@@ -5,14 +5,17 @@ import { parseCookies } from "@/helpers/index";
 import styles from "@/styles//Dashboard.module.css";
 
 export default function Dashboard({ events }) {
-  console.log(events);
+  const deleteEvent = (id) => {
+    // TODO: Add logic to delete an event
+    console.log(id);
+  };
   return (
     <Layout title="User Dashboard">
       <div className={styles.dash}>
         <h1>Dashboard</h1>
         <h3>My Events</h3>
         {events.map((evt) => (
-          <DashboardEvent key={evt.id} evt={evt} />
+          <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />
         ))}
       </div>
     </Layout>
