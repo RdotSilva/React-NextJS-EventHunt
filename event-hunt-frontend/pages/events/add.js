@@ -7,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { API_URL } from "@/config/index";
+import { parseCookies } from "@/helpers/index";
 
-export default function AddEventPage() {
+export default function AddEventPage({ token }) {
   const [values, setValues] = useState({
     name: "",
     performers: "",
@@ -41,6 +42,7 @@ export default function AddEventPage() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
@@ -80,4 +82,18 @@ export default function AddEventPage() {
       </form>
     </Layout>
   );
+}
+
+/**
+ * Get the token from the incoming request
+ * @param {Object} { req } Incoming request
+ */
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req);
+
+  return {
+    props: {
+      token,
+    },
+  };
 }
