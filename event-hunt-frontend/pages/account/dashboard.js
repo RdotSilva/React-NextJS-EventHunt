@@ -3,12 +3,35 @@ import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import { parseCookies } from "@/helpers/index";
 import styles from "@/styles//Dashboard.module.css";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
-export default function Dashboard({ events }) {
-  const deleteEvent = (id) => {
-    // TODO: Add logic to delete an event
-    console.log(id);
+export default function Dashboard({ events, token }) {
+  const router = useRouter();
+
+  /**
+   * Remove an event from the database and redirect user
+   * @param {string} id ID of the event to delete
+   */
+  const deleteEvent = async (id) => {
+    if (confirm("Are you sure?")) {
+      const res = await fetch(`${API_URL}/events/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+      } else {
+        router.reload();
+      }
+    }
   };
+
   return (
     <Layout title="User Dashboard">
       <div className={styles.dash}>
@@ -39,6 +62,9 @@ export async function getServerSideProps({ req }) {
   const events = await res.json();
 
   return {
-    props: { events },
+    props: {
+      events,
+      token,
+    },
   };
 }
