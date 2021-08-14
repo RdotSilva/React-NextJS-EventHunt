@@ -11,8 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { API_URL } from "@/config/index";
+import { parseCookies } from "@/helpers/index";
 
-export default function EditEventPage({ evt }) {
+export default function EditEventPage({ evt, token }) {
   const [values, setValues] = useState({
     name: evt.name,
     performers: evt.performers,
@@ -51,6 +52,7 @@ export default function EditEventPage({ evt }) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
@@ -120,13 +122,16 @@ export default function EditEventPage({ evt }) {
   );
 }
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req);
+
   const res = await fetch(`${API_URL}/events/${id}`);
   const evt = await res.json();
 
   return {
     props: {
       evt,
+      token,
     },
   };
 }
