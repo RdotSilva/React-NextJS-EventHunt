@@ -6,7 +6,7 @@ import Geocode from "react-geocode";
 
 export default function EventMap({ evt }) {
   const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
+  const [lng, setLng] = useState(null);
   const [loading, setLoading] = useState(true);
   const [viewport, setViewport] = useState({
     latitude: 53.2707,
@@ -15,6 +15,26 @@ export default function EventMap({ evt }) {
     height: "500px",
     zoom: 12,
   });
+
+  /**
+   * Get the lat and lng of an address and set the state
+   */
+  useEffect(() => {
+    fetch(
+      `https://api.geoapify.com/v1/geocode/search?text=${evt.address}&apiKey=${process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        const { lat, lon } = result.features[0].properties;
+        setLat(lat);
+        setLng(lon);
+        setViewport({ ...viewport, latitude: lat, longitude: lon });
+        setLoading(false);
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
+
+  if (loading) return false;
 
   return <div>MAP</div>;
 }
