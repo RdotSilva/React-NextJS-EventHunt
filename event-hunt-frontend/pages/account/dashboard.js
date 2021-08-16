@@ -24,9 +24,13 @@ export default function Dashboard({ events, token }) {
 
       const data = await res.json();
 
+      console.log(data);
+
       if (!res.ok) {
         toast.error(data.message);
+        return;
       } else {
+        // TODO: Add toast to show removal of event
         router.reload();
       }
     }
