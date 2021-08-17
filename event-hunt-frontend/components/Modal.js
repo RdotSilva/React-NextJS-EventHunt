@@ -3,11 +3,18 @@ import ReactDOM from "react-dom";
 import { FaTimes } from "react-icons/fa";
 import styles from "@/styles/Modal.module.css";
 
+/**
+ * Component used to render a modal
+ */
 export default function Modal({ show, onClose, children, title }) {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => setIsBrowser(true));
 
+  /**
+   * Handle the closing of the modal
+   * @param {Object} e The event object
+   */
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
