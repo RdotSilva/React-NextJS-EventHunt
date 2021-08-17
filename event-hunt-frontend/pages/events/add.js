@@ -47,6 +47,8 @@ export default function AddEventPage({ token }) {
       body: JSON.stringify(values),
     });
 
+    // TODO: Add toast for successful creation of event
+
     if (!res.ok) {
       if (res.status === 403 || res.status === 401) {
         toast.error("No token included");
